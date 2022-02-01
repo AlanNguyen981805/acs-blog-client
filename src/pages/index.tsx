@@ -1,9 +1,10 @@
+// import styles from '../styles/Home.module.scss'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styles from '../../styles/Home.module.css'
+// import styles from '../../styles/Home.module.css'
 import Layout from '../components/layout'
 import { getListAddress } from '../redux/test/actionTest'
 
@@ -15,9 +16,9 @@ const Home: NextPage = () => {
     dispatch(getListAddress('aaa'))
   }, [])
   return (
-    <Layout>
-      
-    </Layout>
+    <>
+      <h1>Layout</h1>
+    </>
   )
 }
 

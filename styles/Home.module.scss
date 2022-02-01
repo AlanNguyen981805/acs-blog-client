@@ -4,7 +4,7 @@
 
 .header {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   display: flex;
   position: relative;
   align-items: center;
@@ -20,7 +20,7 @@
   top: 0;
   left: 0;
   animation: grow 60s linear .5s infinite;
-  background: linear-gradient(rgba(103,135,211, .6), rgba(144,25,166, .6)), url("http://res.cloudinary.com/dq5anctrd/image/upload/v1496258351/music-1970040_960_720_nqa715.jpg") no-repeat fixed top center / cover;
+  // background: linear-gradient(rgba(103,135,211, .6), rgba(144,25,166, .6)), url("https://lh3.googleusercontent.com/pw/AM-JKLVuwCz6hEKHyb_ocRT8STyVWRh8EJQNYLOg1b3uqRcNIwhyaWNl-DSsXo7iAN9reBv9DzTAyIANe8cC5zUs0PcEZ8wyS6W_QmgPSsVh67Zw_Z6fbj_hr3ctJ4m0ndP4xjJnhEm-skTD8p1OaGtnv5iU=w1920-h1080-no?authuser=2") no-repeat fixed top center / cover;
 }
 
 .header .nav {
@@ -50,6 +50,7 @@
   display: block;
   position: relative;
   padding: 20px 20px 10px;
+  font-size: 16px;
 }
 
 .header .nav .li .a:before, .header .nav .li .a:after {
