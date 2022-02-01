@@ -1,5 +1,5 @@
 import { IUserLogin } from "../../utils/TypeScript";
-import { AUTH, AUTH_ERROR, AUTH_SUCCESS } from "./type";
+import { AUTH, AUTH_ERROR, AUTH_SUCCESS, REFRESH_TOKEN } from "./type";
 
 export const authAction = (values: IUserLogin) => ({
     type: AUTH,
@@ -14,4 +14,8 @@ export const authSuccess = (data: any) => ({
 export const authError = (err: any) => ({
     type: AUTH_ERROR,
     payload: err
+})
+
+export const refreshToken = () => ({
+    type: REFRESH_TOKEN,
 })

@@ -6,9 +6,11 @@ const Layout: React.FC = ({ children }) => {
     return (
         <div>
             <Header />
+            <div style={{height: '100vh'}}>
                 {
                     children
                 }
+            </div>
             <Footer />
         </div>
     );

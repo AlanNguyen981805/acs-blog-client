@@ -17,7 +17,9 @@ const Home: NextPage = () => {
   }, [])
   return (
     <>
-      <h1>Layout</h1>
+      <div style={{height: '100vh'}}>
+
+      </div>
     </>
   )
 }

@@ -1,15 +1,24 @@
 import './../../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { wrapper } from '../redux/store'
-import { Provider, useStore } from 'react-redux'
+import { Provider, useDispatch, useStore } from 'react-redux'
 import { SessionProvider } from "next-auth/react"
 import Alert from '../components/global/alert'
 import { Toaster } from 'react-hot-toast'
 import Layout from '../components/layout'
+import { useEffect } from 'react'
+import { refreshToken } from '../redux/auth/action'
 
 function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
   const reduxStore = useStore();
+  const dispatch = useDispatch()
 
+  useEffect(() => {
+    let a = localStorage.getItem("logged")
+    
+    if(a !== "true") return
+    dispatch(refreshToken())
+  }, [])
   return (
     <>
     <SessionProvider session={session}>
