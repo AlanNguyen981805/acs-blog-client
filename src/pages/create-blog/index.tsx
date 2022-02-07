@@ -1,58 +1,84 @@
-import { Field, Formik } from 'formik';
+import { ErrorMessage, Field, Formik } from 'formik';
 import React, { useRef, useState } from 'react';
 import CardVertical from '../../components/cards/CardVertical';
 import ReactQill from '../../components/editors/react-quill';
-import Input from '../../components/global/input';
+import * as Yup from "yup"
+import PreviewImg from '../../components/global/previewImg';
+import { ValidationCreateBlog } from './validation';
+import { IBlog } from '../../utils/TypeScript';
 
 const CreateBlog = () => {
     const refImg: any = useRef(null)
-    const initialValue = { title: '', description: '' }
+    const refFormik: any = useRef(null)
+    const initialValue: IBlog = { 
+        title: '', 
+        description: '', 
+        category: "", 
+        content: "", 
+        file: null 
+    }
     const [blog, setBlog] = useState(initialValue)
+    const [content, setContent] = useState('')
 
-    const handleSubmit = () => {
-        console.log("submit")
+    const handleSubmit = (values: IBlog) => {
+        console.log(values)
     }
 
     return (
         <>
-            <div className="container-blog">
-                <div className="box-blog">
-                    <div className="box-blog-left">
-                        <h3>Tạo Bài viết của bạn</h3>
-                        <Formik
-                            initialValues={{
-                                title: "",
-                                description: "",
-                                category: ""
-                            }}
-                            onSubmit={handleSubmit}
-                        >
-                            {({
-                                values
-                            }) => {
-                                try {
-                                    setBlog(values)
-                                } catch (error) {
-                                    
-                                }
-                                return (
-                                    <form>
+            <Formik
+                initialValues={initialValue}
+                enableReinitialize={true}
+                validationSchema={Yup.object().shape(ValidationCreateBlog)}
+                onSubmit={handleSubmit}
+                innerRef={refFormik}
+            >
+                {({
+                    values,
+                    errors,
+                    setFieldValue,
+                    handleSubmit,
+                    handleChange,
+                    touched,
+                    handleBlur,
+                    setFieldTouched
+                }) => {
+                    setBlog(values)
+                    return (
+                        <div className="container-blog">
+                            <form onSubmit={handleSubmit}>
+                                <div className="box-blog">
+                                    <div className="box-blog-left">
+                                        <h3>Tạo Bài viết của bạn</h3>
+
                                         <div className="wrap-input-create-blog">
                                             <Field
                                                 name="title"
                                                 className="input-login"
                                                 placeholder="Tiêu đề của bạn"
                                             />
+                                            <ErrorMessage name="title" />
                                             <div className="box-upload"
                                                 onClick={(e) => refImg && refImg.current.click()}
                                             >
                                                 <input
                                                     type="file"
                                                     style={{ display: 'none' }}
+                                                    name="file"
                                                     ref={refImg}
+                                                    onChange={(event: any) => {
+                                                        setFieldValue("file", event.currentTarget.files[0]);
+                                                        setFieldTouched('file');
+                                                    }}
+                                                    onBlur={handleBlur}
                                                 />
-                                                Chọn ảnh cho tiêu đề
+                                                Chọn ảnh tiêu đề
                                             </div>
+                                            {
+                                                errors && errors.file && touched.file
+                                                    ? <span>{errors.file}</span>
+                                                    : null
+                                            }
                                             <Field
                                                 as="textarea"
                                                 name="description"
@@ -60,9 +86,10 @@ const CreateBlog = () => {
                                                 placeholder="Mô tả ngắn"
                                                 style={{ height: "100px" }}
                                             />
+                                            <ErrorMessage name="description" />
 
                                             <div className="select">
-                                                <select name="format" id="format">
+                                                <select name="category" id="category" onChange={handleChange}>
                                                     <option selected disabled>Chọn loại bài viết</option>
                                                     <option value="pdf">PDF</option>
                                                     <option value="txt">txt</option>
@@ -71,22 +98,26 @@ const CreateBlog = () => {
                                                     <option value="mobi">mobi</option>
                                                 </select>
                                             </div>
-
+                                            <ErrorMessage name="category" />
                                         </div>
-                                    </form>
-                                )
-                            }}
-                        </Formik>
-                    </div>
-                    <div className="box-blog-right">
-                        <h3>Xem trước</h3>
-                        <CardVertical blog={blog} />
-                    </div>
-                </div>
-                <div style={{ padding: '0 50px' }}>
-                    <ReactQill />
-                </div>
-            </div>
+                                    </div>
+                                    <div className="box-blog-right">
+                                        <h3>Xem trước</h3>
+                                        <CardVertical
+                                            blog={blog}
+                                            img={refFormik?.current?.values.file}
+                                        />
+                                    </div>
+                                </div>
+                                <div style={{ padding: '0 50px' }}>
+                                    <ReactQill setFieldValue={setFieldValue} setContent={setContent} />
+                                </div>
+                                <button type="submit">Tạo bài viết</button>
+                            </form>
+                        </div>
+                    )
+                }}
+            </Formik>
         </>
     );
 };

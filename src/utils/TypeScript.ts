@@ -32,5 +32,8 @@ export interface IUser {
 
 export interface IBlog {
     title: string,
-    description: string
+    description: string,
+    category: string,
+    content: string,
+    file?: File | null
 }

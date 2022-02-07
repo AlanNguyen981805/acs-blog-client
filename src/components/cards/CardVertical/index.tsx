@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IBlog } from '../../../utils/TypeScript';
 
 interface IProps {
-  blog: IBlog
+  blog: IBlog,
+  img: any
 }
 
-const CardVertical: React.FC<IProps> = ({ blog }) => {
-  console.log({blog})
+const CardVertical: React.FC<IProps> = ({ blog, img }) => {
+    const [preview, setPreview] = useState<string>()
+
+    useEffect(() => {
+      if(!img)  {
+          setPreview(undefined)
+          return
+      }
+      const objectUrl = URL.createObjectURL(img)
+      setPreview(objectUrl)
+      return () => URL.revokeObjectURL(objectUrl)
+      console.log(img)
+  }, [img])
+
     return (
         <div className="card">
             <div className="card-img">
-              <img src="https://assets.codepen.io/285131/uslmOwQpdRRUwr6AmBP6JdzeHjS.jpg" />
+              <img src={preview ?? "https://assets.codepen.io/285131/uslmOwQpdRRUwr6AmBP6JdzeHjS.jpg"} />
             </div>
             <div className="card-body">
               <h2 className="card-title">

@@ -18,6 +18,8 @@
 	img {
 		position: absolute;
 		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 }
 
@@ -29,6 +31,7 @@
 	font-size: 1.25rem;
 	line-height: 1.33;
 	font-weight: 700;
+	text-align: left;
 	&.skeleton { // NOTICE THIS
 		min-height: 28px;
 		border-radius: 4px;

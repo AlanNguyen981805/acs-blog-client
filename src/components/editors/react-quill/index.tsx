@@ -3,15 +3,22 @@ import dynamic from 'next/dynamic'
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
-const ReactQill = () => {
+interface IProps {
+    setContent: (value: string) => void,
+    setFieldValue: (name: string, value: string) => void
+}
+const ReactQill: React.FC<IProps> = ({setContent, setFieldValue}) => {
     const modules: any = { toolbar: { container }}
     const [value, setValue] = useState('')
+
+    const handleChange = (e: string) => {
+        setFieldValue("content", e)
+    }
 
     return (
         <ReactQuill 
             modules={modules} 
-            value={value} 
-            onChange={setValue}
+            onChange={handleChange}
             style={{marginTop: 40}}
         />
     );
