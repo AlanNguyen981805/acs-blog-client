@@ -59,22 +59,26 @@ const Register = () => {
                                 name="name" 
                                 type="text" 
                                 placeholder="Nhập tên"
+                                className="input-login"
                             />
                              <ErrorMessage name="name" component="span" className="invalid-feedback" />
                             <Field 
                                 name="account" 
                                 type="text" 
                                 placeholder="email" 
+                                className="input-login"
                             />
                              <ErrorMessage name="account" component="span" className="invalid-feedback" />
                             <Field 
                                 name="password"
                                 placeholder="Mật khẩu" 
+                                className="input-login"
                             />
                              <ErrorMessage name="password" component="span" className="invalid-feedback" />
                             <Field 
                                 name="cf_password"
                                 placeholder="Nhập lại mật khẩu" 
+                                className="input-login"
                             />
                              <ErrorMessage name="cf_password" component="span" className="invalid-feedback" />
                             <button type="submit">Đăng ký</button>

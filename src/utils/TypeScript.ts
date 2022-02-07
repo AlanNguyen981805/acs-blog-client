@@ -29,3 +29,8 @@ export interface IUser {
     updatedAt: string
     _id: string
 }
+
+export interface IBlog {
+    title: string,
+    description: string
+}

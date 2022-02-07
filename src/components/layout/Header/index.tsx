@@ -13,7 +13,7 @@ const Header = () => {
 
     const afloginMenu = [
         {label: "Trang chủ", path: '/'},
-        {label: "Tạo Bài Viết", path: 'create-post'}
+        {label: "Tạo Bài Viết", path: 'create-blog'}
     ]
 
     const navLinks = auth.access_token ? afloginMenu : bfLoginMenu
@@ -21,7 +21,7 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <nav className={styles.nav}>
-                <h1 className={styles.logo}><a href="#">Sing</a></h1>
+                <h1 className={styles.logo}><Link href={"/"}>ACS</Link></h1>
                 <ul className={styles.ul}>
                     {
                         navLinks.map((item) => {

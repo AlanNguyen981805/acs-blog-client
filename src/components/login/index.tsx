@@ -72,9 +72,9 @@ const LoginComponent: React.FC = () => {
                             </a>
                         </div>
                         <span>hoặc sử dụng accout của bạn</span>
-                        <Field type="email" placeholder="Email" name="email" />
+                        <Field className="input-login" type="email" placeholder="Email" name="email" />
                         <ErrorMessage name="email" component="span" />
-                        <Field type="password" placeholder="Password" name="password" />
+                        <Field className="input-login" type="password" placeholder="Password" name="password" />
                         <ErrorMessage name="password" component="span" />
                         <button type="submit">Đăng nhập</button>
                     </form>

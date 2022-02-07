@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import CardVertical from '../components/cards/CardVertical'
 // import styles from '../../styles/Home.module.css'
 import Layout from '../components/layout'
 import { getListAddress } from '../redux/test/actionTest'
@@ -17,8 +18,34 @@ const Home: NextPage = () => {
   }, [])
   return (
     <>
-      <div style={{height: '100vh'}}>
-
+      <div>
+        <div >
+          <h3 className="category-title">Bài viết xem nhiều nhất</h3>
+          <div className="containerCard">
+            <CardVertical />
+            <CardVertical />
+            <CardVertical />
+            <CardVertical />
+          </div>
+        </div>
+        <div >
+          <h3 className="category-title">Chia sẻ về cuộc sống</h3>
+          <div className="containerCard">
+            <CardVertical />
+            <CardVertical />
+            <CardVertical />
+            <CardVertical />
+          </div>
+        </div>
+        <div >
+          <h3 className="category-title">Loại tin</h3>
+          <div className="containerCard">
+            <CardVertical />
+            <CardVertical />
+            <CardVertical />
+            <CardVertical />
+          </div>
+        </div>
       </div>
     </>
   )
