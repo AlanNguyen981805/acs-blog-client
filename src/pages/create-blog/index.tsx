@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react';
 import CardVertical from '../../components/cards/CardVertical';
 import ReactQill from '../../components/editors/react-quill';
 import * as Yup from "yup"
-import PreviewImg from '../../components/global/previewImg';
 import { ValidationCreateBlog } from './validation';
 import { IBlog } from '../../utils/TypeScript';
 
@@ -57,7 +56,11 @@ const CreateBlog = () => {
                                                 className="input-login"
                                                 placeholder="Tiêu đề của bạn"
                                             />
-                                            <ErrorMessage name="title" />
+                                            <ErrorMessage 
+                                                name="title" 
+                                                component="span" 
+                                                className="error-notify" 
+                                            />
                                             <div className="box-upload"
                                                 onClick={(e) => refImg && refImg.current.click()}
                                             >
@@ -76,7 +79,7 @@ const CreateBlog = () => {
                                             </div>
                                             {
                                                 errors && errors.file && touched.file
-                                                    ? <span>{errors.file}</span>
+                                                    ? <span className="error-notify">{errors.file}</span>
                                                     : null
                                             }
                                             <Field
@@ -86,7 +89,11 @@ const CreateBlog = () => {
                                                 placeholder="Mô tả ngắn"
                                                 style={{ height: "100px" }}
                                             />
-                                            <ErrorMessage name="description" />
+                                            <ErrorMessage 
+                                                name="description" 
+                                                component="span" 
+                                                className="error-notify"    
+                                            />
 
                                             <div className="select">
                                                 <select name="category" id="category" onChange={handleChange}>
@@ -98,7 +105,11 @@ const CreateBlog = () => {
                                                     <option value="mobi">mobi</option>
                                                 </select>
                                             </div>
-                                            <ErrorMessage name="category" />
+                                            <ErrorMessage 
+                                                name="category" 
+                                                component="span" 
+                                                className="error-notify"
+                                            />
                                         </div>
                                     </div>
                                     <div className="box-blog-right">
@@ -109,10 +120,12 @@ const CreateBlog = () => {
                                         />
                                     </div>
                                 </div>
-                                <div style={{ padding: '0 50px' }}>
+                                <div>
                                     <ReactQill setFieldValue={setFieldValue} setContent={setContent} />
                                 </div>
-                                <button type="submit">Tạo bài viết</button>
+                                <div className="box-button-create-blog">
+                                    <button type="submit">Tạo bài viết</button>
+                                </div>
                             </form>
                         </div>
                     )

@@ -58,7 +58,7 @@ const LoginComponent: React.FC = () => {
                     handleSubmit,
                     isSubmitting,
                 }) => (
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="form-auth">
                         <h1>Đăng nhập</h1>
                         <div className="social-container">
                             <a href="" className="social">

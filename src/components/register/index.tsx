@@ -40,7 +40,7 @@ const Register = () => {
                     isSubmitting,
                 }) => (
                    
-                        <Form onSubmit={handleSubmit}>
+                        <Form onSubmit={handleSubmit} className="form-auth">
                             <h1>Tạo tài khoản</h1>
                             <div className="social-container">
                                 <a href="" className="social">
