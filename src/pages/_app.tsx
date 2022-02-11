@@ -1,4 +1,4 @@
-import './../../styles/globals.scss'
+import '../../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { wrapper } from '../redux/store'
 import { Provider, useDispatch, useStore } from 'react-redux'
@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast'
 import Layout from '../components/layout'
 import { useEffect } from 'react'
 import { refreshToken } from '../redux/auth/action'
+import axios from 'axios'
 
 function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
   const reduxStore = useStore();
@@ -15,7 +16,7 @@ function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
 
   useEffect(() => {
     let a = localStorage.getItem("logged")
-    
+    console.log(a)
     if(a !== "true") return
     dispatch(refreshToken())
   }, [])

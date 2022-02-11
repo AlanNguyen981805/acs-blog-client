@@ -5,22 +5,25 @@ import ReactQill from '../../components/editors/react-quill';
 import * as Yup from "yup"
 import { ValidationCreateBlog } from './validation';
 import { IBlog } from '../../utils/TypeScript';
+import { useDispatch } from 'react-redux';
+import { createBlogAction } from '../../redux/blog/action';
 
 const CreateBlog = () => {
     const refImg: any = useRef(null)
     const refFormik: any = useRef(null)
+    const dispatch = useDispatch()
     const initialValue: IBlog = { 
         title: '', 
         description: '', 
         category: "", 
         content: "", 
-        file: null 
+        thumbnail: null 
     }
     const [blog, setBlog] = useState(initialValue)
     const [content, setContent] = useState('')
 
     const handleSubmit = (values: IBlog) => {
-        console.log(values)
+        dispatch(createBlogAction({...values, thumbnail: 'https://cafebiz.cafebizcdn.vn/thumb_w/600/162123310254002176/2022/2/7/photo1644222660491-16442226608232106459073.jpg'}))
     }
 
     return (
@@ -67,19 +70,19 @@ const CreateBlog = () => {
                                                 <input
                                                     type="file"
                                                     style={{ display: 'none' }}
-                                                    name="file"
+                                                    name="thumbnail"
                                                     ref={refImg}
                                                     onChange={(event: any) => {
-                                                        setFieldValue("file", event.currentTarget.files[0]);
-                                                        setFieldTouched('file');
+                                                        setFieldValue("thumbnail", event.currentTarget.files[0]);
+                                                        setFieldTouched('thumbnail');
                                                     }}
                                                     onBlur={handleBlur}
                                                 />
                                                 Chọn ảnh tiêu đề
                                             </div>
                                             {
-                                                errors && errors.file && touched.file
-                                                    ? <span className="error-notify">{errors.file}</span>
+                                                errors && errors.thumbnail && touched.thumbnail
+                                                    ? <span className="error-notify">{errors.thumbnail}</span>
                                                     : null
                                             }
                                             <Field
@@ -116,7 +119,7 @@ const CreateBlog = () => {
                                         <h3>Xem trước</h3>
                                         <CardVertical
                                             blog={blog}
-                                            img={refFormik?.current?.values.file}
+                                            img={refFormik?.current?.values.thumbnail}
                                         />
                                     </div>
                                 </div>

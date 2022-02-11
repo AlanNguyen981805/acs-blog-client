@@ -1,21 +1,77 @@
 // import styles from '../styles/Home.module.scss'
+import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CardVertical from '../components/cards/CardVertical'
 // import styles from '../../styles/Home.module.css'
 import Layout from '../components/layout'
+import { authSuccess } from '../redux/auth/action'
 import { getListAddress } from '../redux/test/actionTest'
+import { RootStore } from '../utils/TypeScript'
+import createAxios from '../utils/axiosInstance'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 const Home: NextPage = () => {
   const state = useSelector((state) => state)
   const dispatch = useDispatch()
-  console.log(state)
+  const { auth } = useSelector((state: RootStore) => state)
+  const axiosJWT = axios.create();
+  // const [authStore, setAuth] = useLocalStorage("user", "")
+
+  const [user, setUser] = useState([])
+  // console.log(authStore.access_token)
   useEffect(() => {
-    dispatch(getListAddress('aaa'))
+    // dispatch(getListAddress('aaa'))
+    getAllUser()
   }, [])
+  const refreshTokenAPI = async () => {
+    try {
+        const res = await axios.get("/api/refresh_token", {
+            withCredentials: true
+        })
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+  const getAllUser = async () => {
+    try {
+      const res = await axios.get('http://localhost:5000/api/users')
+
+      const data = await res.data
+      setUser(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleDelete = async (id: string) => {
+    let data: any = localStorage.getItem("user")
+    let parseData = JSON.parse(data)
+    try {
+      const res = await createAxios.delete(`/api/${id}`, {
+        headers: {
+          Authorization: parseData.access_token
+        }
+      })
+      // const res2 = await axios.get(`http://localhost:5000/api/refresh_token`, {
+      //   withCredentials: true
+      // })
+      // console.log(res2)
+
+      // const data = await res.data
+      // console.log(data)
+      // setUser(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <div>
@@ -46,6 +102,18 @@ const Home: NextPage = () => {
             <CardVertical />
           </div>
         </div>
+    {/* <ul>
+        {
+          user.length > 0 && user.map((item: any) => {
+            return (
+              <li>
+                <span>{item?.account}</span>  
+                <button onClick={() => handleDelete(item._id)}>Delete</button>
+              </li>
+            )
+          })
+        }
+    </ul> */}
       </div>
     </>
   )

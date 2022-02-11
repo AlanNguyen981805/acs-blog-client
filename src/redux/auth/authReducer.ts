@@ -1,6 +1,7 @@
-import { AUTH, AUTH_ERROR, AUTH_SUCCESS, IAuth, IAuthType } from "./type"
+import { AUTH, AUTH_ERROR, AUTH_SUCCESS, IAuth, IAuthType, LOGOUT } from "./type"
 
-const authReducer = (state: IAuth = {}, action: IAuthType) => {
+let a = typeof window !== "undefined" && localStorage.getItem("user") !== null ? JSON.parse(localStorage.getItem("user") as any) : {}
+const authReducer = (state: IAuth = a, action: IAuthType) => {
     switch(action.type) {
         case AUTH: 
             return {
@@ -10,11 +11,14 @@ const authReducer = (state: IAuth = {}, action: IAuthType) => {
             }
         
         case AUTH_SUCCESS:
-            localStorage.setItem("logged", "true")
+            // console.log(action.payload)
+            localStorage.setItem("user", JSON.stringify(action.payload))
+
             return {
                 ...state,
                 loading: false,
                 access_token: action.payload.access_token,
+                refresh_token: action.payload.refresh_token,
                 error: {}
             }
         
@@ -25,7 +29,9 @@ const authReducer = (state: IAuth = {}, action: IAuthType) => {
                 access_token: '',
                 loading: false
             }
-        
+        case LOGOUT: 
+            localStorage.removeItem("user")
+            return {}
         default: 
             return state
         

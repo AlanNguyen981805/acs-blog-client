@@ -1,11 +1,16 @@
 import Link from 'next/link';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../../../styles/Home.module.scss'
 import { RootStore } from '../../../utils/TypeScript';
+import createAxios from "../../../utils/axiosInstance"
+import { LOGOUT } from '../../../redux/auth/type';
+import { useRouter } from 'next/router';
 
 const Header = () => {
+    const dispatch = useDispatch()
     const { auth } = useSelector((state: RootStore) => state)
+    const router = useRouter()
     const bfLoginMenu = [
         {label: "Đăng nhập", path: '/login'},
         {label: "Đăng ký", path: '/register'},
@@ -18,6 +23,21 @@ const Header = () => {
 
     const navLinks = auth.access_token ? afloginMenu : bfLoginMenu
 
+    const handleLogout= async () => {
+        try {
+            const res = await createAxios.get('/api/logout')
+            dispatch({
+                type: LOGOUT
+            })
+            router.push("/")
+        } catch (error) {
+            
+        }
+    }
+
+    useEffect(() => {
+        console.log(auth)
+    }, [auth])
     return (
         <header className={styles.header}>
             <nav className={styles.nav}>
@@ -34,6 +54,16 @@ const Header = () => {
                             )
                         })
                     }
+                    {
+                        auth.access_token ? (
+                            <li className={styles.li} onClick={handleLogout}>
+                                <a href="#" className={styles.a}>
+                                    <a >Logout</a>
+                                </a>
+                            </li>
+                        ) :  null
+                    }
+                    
                 </ul>
             </nav>
         </header>

@@ -6,7 +6,7 @@ export const ValidationCreateBlog = {
     title: Yup.string().required("Tiêu đề là bắt buộc"),
     description: Yup.string().required("Mô tả là bắt buộc"),
     category: Yup.string().required("Bạn chưa chọn loại tin"),
-    file: Yup
+    thumbnail: Yup
     .mixed()
     .required("Bạn chưa chọn file")
     .test(

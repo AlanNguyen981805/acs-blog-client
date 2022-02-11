@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authAction } from '../../redux/auth/action';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import Cookie from "js-cookie"
 
 const LoginComponent: React.FC = () => {
     const dispatch = useDispatch();
@@ -27,6 +28,12 @@ const LoginComponent: React.FC = () => {
             })
         }
         if(auth.access_token && !auth.loading) {
+            if(auth.refresh_token) {
+                // Cookie.set('refresh_token', auth.refresh_token, {
+                //     path: 'api/refresh_token',
+                //     expires: 30*24*60*60*1000
+                //   })
+            }
             toast.success("Đăng nhập thành công", {
                 position: "top-right"
             })

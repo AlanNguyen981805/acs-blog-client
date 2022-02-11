@@ -35,5 +35,10 @@ export interface IBlog {
     description: string,
     category: string,
     content: string,
-    file?: File | null
+    thumbnail?: File | null | string
+}
+export interface IDecoded {
+    id: string,
+    iat: number,
+    exp: number
 }
