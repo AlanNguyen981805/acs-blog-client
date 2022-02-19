@@ -1,12 +1,13 @@
 import { ErrorMessage, Field, Formik } from 'formik';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import CardVertical from '../../components/cards/CardVertical';
 import ReactQill from '../../components/editors/react-quill';
 import * as Yup from "yup"
 import { ValidationCreateBlog } from './validation';
-import { IBlog } from '../../utils/TypeScript';
-import { useDispatch } from 'react-redux';
+import { IBlog, ICategory, RootStore } from '../../utils/TypeScript';
+import { useDispatch, useSelector } from 'react-redux';
 import { createBlogAction } from '../../redux/blog/action';
+import { getCategoriesStart } from '../../redux/category/actions';
 
 const CreateBlog = () => {
     const refImg: any = useRef(null)
@@ -17,14 +18,24 @@ const CreateBlog = () => {
         description: '', 
         category: "", 
         content: "", 
-        thumbnail: null 
+        thumbnail: "" 
     }
     const [blog, setBlog] = useState(initialValue)
     const [content, setContent] = useState('')
 
+    const { category, auth, alert } = useSelector((state: RootStore) => state)
+
+
     const handleSubmit = (values: IBlog) => {
         dispatch(createBlogAction({...values, thumbnail: 'https://cafebiz.cafebizcdn.vn/thumb_w/600/162123310254002176/2022/2/7/photo1644222660491-16442226608232106459073.jpg'}))
     }
+
+    useEffect(() => {
+        dispatch(getCategoriesStart())       
+    }, [])
+
+    useEffect(() => {
+    }, [category]) 
 
     return (
         <>
@@ -72,11 +83,12 @@ const CreateBlog = () => {
                                                     style={{ display: 'none' }}
                                                     name="thumbnail"
                                                     ref={refImg}
+                                                    // value="thumbnail"
                                                     onChange={(event: any) => {
                                                         setFieldValue("thumbnail", event.currentTarget.files[0]);
                                                         setFieldTouched('thumbnail');
                                                     }}
-                                                    onBlur={handleBlur}
+                                                    // onBlur={handleBlur}
                                                 />
                                                 Chọn ảnh tiêu đề
                                             </div>
@@ -100,12 +112,14 @@ const CreateBlog = () => {
 
                                             <div className="select">
                                                 <select name="category" id="category" onChange={handleChange}>
-                                                    <option selected disabled>Chọn loại bài viết</option>
-                                                    <option value="pdf">PDF</option>
-                                                    <option value="txt">txt</option>
-                                                    <option value="epub">ePub</option>
-                                                    <option value="fb2">fb2</option>
-                                                    <option value="mobi">mobi</option>
+                                                    {
+                                                        category.loading ? <h1>Loading</h1> : 
+                                                        category.categories?.map((item: ICategory, index) => {
+                                                            return (
+                                                                <option value={item._id}>{item.name}</option>
+                                                            )
+                                                        })
+                                                    }
                                                 </select>
                                             </div>
                                             <ErrorMessage 

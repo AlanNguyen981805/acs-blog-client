@@ -1,10 +1,10 @@
-import { put, takeLatest } from 'redux-saga/effects';
-import axiosClient from '../../utils/axiosClient';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { CreateBlog } from '../../utils/api';
 import { IBlogActionSaga, CREATE_BLOG } from './type';
 
 function* createBlog({payload}: IBlogActionSaga): any {
     try {
-        const res = yield axiosClient.post('api/blog', payload)
+        const res = yield call(CreateBlog, payload)
         console.log(res)
     } catch (error) {
         

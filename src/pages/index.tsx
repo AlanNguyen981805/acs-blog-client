@@ -16,16 +16,8 @@ import createAxios from '../utils/axiosInstance'
 import useLocalStorage from '../hooks/useLocalStorage'
 
 const Home: NextPage = () => {
-  const state = useSelector((state) => state)
-  const dispatch = useDispatch()
-  const { auth } = useSelector((state: RootStore) => state)
-  const axiosJWT = axios.create();
-  // const [authStore, setAuth] = useLocalStorage("user", "")
-
   const [user, setUser] = useState([])
-  // console.log(authStore.access_token)
   useEffect(() => {
-    // dispatch(getListAddress('aaa'))
     getAllUser()
   }, [])
   const refreshTokenAPI = async () => {
@@ -59,14 +51,6 @@ const Home: NextPage = () => {
           Authorization: parseData.access_token
         }
       })
-      // const res2 = await axios.get(`http://localhost:5000/api/refresh_token`, {
-      //   withCredentials: true
-      // })
-      // console.log(res2)
-
-      // const data = await res.data
-      // console.log(data)
-      // setUser(data)
     } catch (error) {
       console.log(error)
     }

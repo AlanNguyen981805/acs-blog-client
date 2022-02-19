@@ -37,6 +37,13 @@ export interface IBlog {
     content: string,
     thumbnail?: File | null | string
 }
+
+export interface ICategory {
+    name: string,
+    createdAt?: string
+    updatedAt?: string
+    _id?: string
+}
 export interface IDecoded {
     id: string,
     iat: number,

@@ -18,7 +18,8 @@ const Header = () => {
 
     const afloginMenu = [
         {label: "Trang chủ", path: '/'},
-        {label: "Tạo Bài Viết", path: 'create-blog'}
+        {label: "Tạo Bài Viết", path: 'create-blog'},
+        {label: "Tạo Loại tin", path: 'create-category'},
     ]
 
     const navLinks = auth.access_token ? afloginMenu : bfLoginMenu

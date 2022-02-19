@@ -8,15 +8,12 @@ export const ValidationCreateBlog = {
     category: Yup.string().required("Bạn chưa chọn loại tin"),
     thumbnail: Yup
     .mixed()
-    .required("Bạn chưa chọn file")
     .test(
         "fileFormat",
         "Định dạng không hỗ trợ",
         (file) => {
             if (file) {
                 return file && SUPPORTED_FORMATS.includes(file.type)
-            } else {
-                return true;
             }
         }
     )
@@ -26,8 +23,6 @@ export const ValidationCreateBlog = {
         (file) => {
             if (file) {
                 return file && file.size <= FILE_SIZE
-            } else {
-                return true;
             }
         }
     )
