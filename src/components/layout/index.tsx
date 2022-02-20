@@ -6,7 +6,7 @@ const Layout: React.FC = ({ children }) => {
     return (
         <div>
             <Header />
-            <div style={{height: '100vh', width: '1270px', margin: '0 auto'}}>
+            <div style={{width: '1270px', margin: '0 auto'}}>
                 {
                     children
                 }

@@ -1,5 +1,5 @@
 import { IBlog } from "../../utils/TypeScript"
-import { CREATE_BLOG, CREATE_BLOG_ERROR, CREATE_BLOG_SUCCESS, IBlogType } from "./type"
+import { CREATE_BLOG, CREATE_BLOG_ERROR, CREATE_BLOG_SUCCESS, GET_BLOG_START, IBlogType } from "./type"
 
 const blogReducer = (state: IBlog[] = [], action: IBlogType) => {
     switch(action.type) {

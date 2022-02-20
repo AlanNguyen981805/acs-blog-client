@@ -1,4 +1,3 @@
-import { IBlog, ICategory } from "../../utils/TypeScript";
 import { 
     GET_CATEGORIES_ERROR, 
     GET_CATEGORIES_START, 

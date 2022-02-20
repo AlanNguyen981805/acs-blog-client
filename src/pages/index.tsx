@@ -14,12 +14,24 @@ import { getListAddress } from '../redux/test/actionTest'
 import { RootStore } from '../utils/TypeScript'
 import createAxios from '../utils/axiosInstance'
 import useLocalStorage from '../hooks/useLocalStorage'
+import { getHomeBlogsStart } from '../redux/home-blog/action'
+import { IHomeBlogs } from '../redux/home-blog/type'
 
 const Home: NextPage = () => {
   const [user, setUser] = useState([])
+  const dispatch = useDispatch()
+  const { homeCategory } = useSelector((state: RootStore) => state)
+
   useEffect(() => {
     getAllUser()
+
+    dispatch(getHomeBlogsStart())
+    console.log(homeCategory)
   }, [])
+
+  useEffect(() => {
+    console.log(homeCategory)
+  }, [homeCategory])
   const refreshTokenAPI = async () => {
     try {
         const res = await axios.get("/api/refresh_token", {
@@ -55,49 +67,31 @@ const Home: NextPage = () => {
       console.log(error)
     }
   }
+  
 
   return (
     <>
       <div>
         <div >
-          <h3 className="category-title">Bài viết xem nhiều nhất</h3>
-          <div className="containerCard">
-            <CardVertical />
-            <CardVertical />
-            <CardVertical />
-            <CardVertical />
-          </div>
+          {
+            homeCategory.length > 0 && homeCategory.map((item: IHomeBlogs) => {
+              return (
+                <>
+                  <h3 className="category-title">{item.name}</h3>
+                  <div className="containerCard">
+                    {
+                      item.blog.map((blog: any) => {
+                        return (
+                          <CardVertical blog={blog} />
+                        )
+                      })
+                    }
+                  </div>
+              </>
+              )
+            })
+          }
         </div>
-        <div >
-          <h3 className="category-title">Chia sẻ về cuộc sống</h3>
-          <div className="containerCard">
-            <CardVertical />
-            <CardVertical />
-            <CardVertical />
-            <CardVertical />
-          </div>
-        </div>
-        <div >
-          <h3 className="category-title">Loại tin</h3>
-          <div className="containerCard">
-            <CardVertical />
-            <CardVertical />
-            <CardVertical />
-            <CardVertical />
-          </div>
-        </div>
-    {/* <ul>
-        {
-          user.length > 0 && user.map((item: any) => {
-            return (
-              <li>
-                <span>{item?.account}</span>  
-                <button onClick={() => handleDelete(item._id)}>Delete</button>
-              </li>
-            )
-          })
-        }
-    </ul> */}
       </div>
     </>
   )

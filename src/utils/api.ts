@@ -19,3 +19,13 @@ export const GetAllCategories = async (payload: any) => {
     const res = await createAxios.get(`/api/categories`)
     return res
 }
+
+export const GetHomeBlogs = async (payload: any) => {
+    const res = await createAxios.get(`/api/blogs`)
+    return res
+}
+
+export const getDetailBlog = async (idBlog: string) => {
+    const res = await createAxios.get(`/api/blog/${idBlog}`)
+    return res
+}

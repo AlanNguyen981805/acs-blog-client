@@ -32,6 +32,12 @@
 	line-height: 1.33;
 	font-weight: 700;
 	text-align: left;
+	cursor: pointer;
+
+	&:hover {
+		color: #16a085;
+		transition: 0.3s;
+	}
 	&.skeleton { // NOTICE THIS
 		min-height: 28px;
 		border-radius: 4px;

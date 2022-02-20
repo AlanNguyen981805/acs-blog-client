@@ -31,6 +31,7 @@ export interface IUser {
 }
 
 export interface IBlog {
+    _id: string,
     title: string,
     description: string,
     category: string,
@@ -44,6 +45,7 @@ export interface ICategory {
     updatedAt?: string
     _id?: string
 }
+
 export interface IDecoded {
     id: string,
     iat: number,
