@@ -29,3 +29,8 @@ export const getDetailBlog = async (idBlog: string) => {
     const res = await createAxios.get(`/api/blog/${idBlog}`)
     return res
 }
+
+export const getBlogsByCategory = async (slug: string) => {
+    const res = await createAxios.get(`/api/blogs/${slug}`)
+    return res
+}

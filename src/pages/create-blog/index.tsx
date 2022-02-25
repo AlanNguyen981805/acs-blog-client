@@ -22,7 +22,6 @@ const CreateBlog = () => {
     }
     const [blog, setBlog] = useState(initialValue)
     const [content, setContent] = useState('')
-
     const { category, auth, alert } = useSelector((state: RootStore) => state)
 
 

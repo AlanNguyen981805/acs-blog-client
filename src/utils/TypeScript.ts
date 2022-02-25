@@ -43,7 +43,8 @@ export interface IBlog {
 export interface ICategory {
     name: string,
     createdAt?: string
-    updatedAt?: string
+    updatedAt?: string,
+    slug?: string,
     _id?: string
 }
 

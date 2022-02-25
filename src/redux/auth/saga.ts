@@ -13,9 +13,7 @@ function* getAuth({payload}: IAction): any {
     try {
         // const res = yield axios.post(`api/login`, payload)
         const res = yield call(LoginUser, payload)
-        console.log(res)
         if(res.status === 200) {
-            console.log(res)
             yield put(authSuccess(res.data))
             
         }
@@ -28,7 +26,6 @@ function* getAuth({payload}: IAction): any {
 function* getRefreshToken(): any {
     try {
         const res = yield getApi('refresh_token')
-        console.log(res)
     } catch (error) {
         console.log(error)
     }

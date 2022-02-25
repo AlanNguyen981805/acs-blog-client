@@ -5,6 +5,7 @@ import alert from './alert/alertReducer';
 import blog from './blog/blogReducer';
 import category from './category/categoryReducer'
 import homeCategory from './home-blog/reducer'
+import blogsByCategory from './blog-by-category/reducer'
 
 const rootReducer = combineReducers({
     listAddressFilterRuducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     alert,
     blog,
     category,
-    homeCategory
+    homeCategory,
+    blogsByCategory
 })
 
 export default rootReducer

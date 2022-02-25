@@ -7,7 +7,6 @@ import { IUserRegister } from '../../utils/TypeScript';
 const Register = () => {
     const handleSubmit = (values: IUserRegister, {setErrors}: any) => {
         axiosClient.post('/api/register', values).then(res => {
-            console.log(res)
         }).catch(err => {
             setErrors(err.response.data.msg)
         })

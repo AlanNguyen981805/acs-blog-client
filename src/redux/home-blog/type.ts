@@ -6,6 +6,7 @@ export interface IHomeBlogs {
     _id: string,
     name: string,
     count: number,
+    slug: string,
     blog: any
 }
 

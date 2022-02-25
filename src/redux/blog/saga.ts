@@ -5,7 +5,7 @@ import { IBlogActionSaga, CREATE_BLOG } from './type';
 function* createBlog({payload}: IBlogActionSaga): any {
     try {
         const res = yield call(CreateBlog, payload)
-        console.log(res)
+
     } catch (error) {
         
     }

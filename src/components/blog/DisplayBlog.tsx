@@ -7,7 +7,6 @@ interface IProps {
 
 const DisplayBlog: React.FC<IProps> = ({detailBlog}) => {
     useEffect(() => {
-        console.log(detailBlog)
     }, [detailBlog])
     return (
         <div className="display-blog">

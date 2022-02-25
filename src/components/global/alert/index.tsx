@@ -6,8 +6,6 @@ import toast, { Toaster } from 'react-hot-toast';
 const Alert = () => {
     const { alert }: any = useSelector((state: RootStore) => state)
     const dispatch = useDispatch()
-
-    console.log(alert)
     useEffect(() => {
         if(!alert.error) return
 

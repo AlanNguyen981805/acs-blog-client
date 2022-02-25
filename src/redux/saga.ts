@@ -1,5 +1,6 @@
 import { all, call } from "redux-saga/effects";
 import { watchingGetAuth } from "./auth/saga";
+import { watchingGetBlogsByCategory } from "./blog-by-category/saga";
 import { watchingBlog } from "./blog/saga";
 import { watchingCategory } from "./category/saga";
 import { watchingGetHomeBLogs } from "./home-blog/saga";
@@ -11,6 +12,7 @@ export default function* rootSaga() {
         call(watchingGetAuth),
         call(watchingBlog),
         call(watchingCategory),
-        call(watchingGetHomeBLogs)
+        call(watchingGetHomeBLogs),
+        call(watchingGetBlogsByCategory)
     ])
 }
