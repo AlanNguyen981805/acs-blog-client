@@ -5,6 +5,8 @@
 @import "./BlogHome.module.scss";
 @import "./CreateBlog.scss";
 @import "./Login.module.scss";
+@import "./DisplayBlog.scss";
+@import "./Footer.scss";
 @import "./variable";
 * {
     box-sizing: border-box;
@@ -37,9 +39,9 @@ h1 {
     margin: 0;
 }
 
-h2 {
-    text-align: center;
-}
+// h2 {
+//     text-align: center;
+// }
 
 p {
     font-size: 14px;
@@ -129,8 +131,8 @@ a {
 	width: 100%;
 	display: flex;
 	align-items: center;
-	flex-wrap: wrap;
-  padding: 0 20px;
+	// flex-wrap: wrap;
+  // padding: 0 20px;
 }
 
 

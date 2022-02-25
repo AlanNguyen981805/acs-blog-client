@@ -6,23 +6,14 @@ import { RootStore } from '../../../utils/TypeScript';
 import createAxios from "../../../utils/axiosInstance"
 import { LOGOUT } from '../../../redux/auth/type';
 import { useRouter } from 'next/router';
+import LogoGlobal from '../../global/logo';
+import { AF_LOGIN_MENU, BF_LOGIN_MENU } from '../../../utils/constand';
 
 const Header = () => {
     const dispatch = useDispatch()
     const { auth } = useSelector((state: RootStore) => state)
     const router = useRouter()
-    const bfLoginMenu = [
-        {label: "Đăng nhập", path: '/login'},
-        {label: "Đăng ký", path: '/register'},
-    ]
-
-    const afloginMenu = [
-        {label: "Trang chủ", path: '/'},
-        {label: "Tạo Bài Viết", path: 'create-blog'},
-        {label: "Tạo Loại tin", path: 'create-category'},
-    ]
-
-    const navLinks = auth.access_token ? afloginMenu : bfLoginMenu
+    const navLinks = auth.access_token ? AF_LOGIN_MENU : BF_LOGIN_MENU
 
     const handleLogout= async () => {
         try {
@@ -42,7 +33,13 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <nav className={styles.nav}>
-                <h1 className={styles.logo}><Link href={"/"}>ACS</Link></h1>
+                <h1 className={styles.logo}>
+                    <Link href={"/"}>
+                        <LogoGlobal 
+                            width={70}
+                            height={50}
+                        />
+                    </Link></h1>
                 <ul className={styles.ul}>
                     {
                         navLinks.map((item) => {

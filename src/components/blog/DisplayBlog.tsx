@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IBlog } from '../../utils/TypeScript';
 
 interface IProps {
@@ -6,13 +6,22 @@ interface IProps {
 }
 
 const DisplayBlog: React.FC<IProps> = ({detailBlog}) => {
+    useEffect(() => {
+        console.log(detailBlog)
+    }, [detailBlog])
     return (
-        <div>
-            <h1 style={{ textAlign: "center" }}>{detailBlog.title}</h1>
-            <img src={detailBlog.thumbnail} alt="" />
-            <p dangerouslySetInnerHTML={{
-                __html: `${detailBlog.content}`
-            }}></p>
+        <div className="display-blog">
+            <div className="left-blog">
+                <h1 style={{ textAlign: "center" }}>{detailBlog.title}</h1>
+                h2
+                <img src={detailBlog.thumbnail} alt="" />
+                <div key={detailBlog._id} dangerouslySetInnerHTML={{
+                    __html: `${detailBlog.content}`
+                }}></div>
+            </div>
+            {/* <div className="right-blog">
+                Right Blog
+            </div> */}
         </div>
     );
 };

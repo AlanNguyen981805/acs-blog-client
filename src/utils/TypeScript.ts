@@ -36,7 +36,8 @@ export interface IBlog {
     description: string,
     category: string,
     content: string,
-    thumbnail?: File | null | string
+    thumbnail?: File | null | string,
+    slug?: string
 }
 
 export interface ICategory {

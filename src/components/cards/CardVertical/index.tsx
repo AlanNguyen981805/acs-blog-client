@@ -15,7 +15,7 @@ const CardVertical: React.FC<IProps> = ({ blog, img }) => {
     useEffect(() => {
       console.log(blog)
       if(!img)  {
-          setPreview(undefined)
+          setPreview('https://cafebiz.cafebizcdn.vn/thumb_w/640/162123310254002176/2022/2/24/photo1645686197927-16456861980201522106017.jpg')
           return
       }
       const objectUrl = URL.createObjectURL(img)
@@ -30,7 +30,7 @@ const CardVertical: React.FC<IProps> = ({ blog, img }) => {
               <img src={preview ?? blog.thumbnail} />
             </div>
             <div className="card-body">
-              <h2 className="card-title" onClick={() => router.push(`/blog/${blog._id}`)}>
+              <h2 className="card-title" onClick={() => router.push(`/blog/${blog.slug}`)}>
                   {blog?.title ?? ''}
               </h2>
               <p className="card-intro">
